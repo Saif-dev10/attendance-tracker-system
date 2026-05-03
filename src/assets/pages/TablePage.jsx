@@ -1,17 +1,87 @@
+import { useState } from "react";
 import { Header } from "../components/Header";
 import { SideBar } from "../components/Sidebar";
 import './Table.css';
 
 export function TablePage() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [days, setDays] = useState("");
+  const [courseName, setCourseName] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+  const [schedule, setschedule] = useState([]);
+  // const [displaySchedule, setDisplaySchedule] = useState([]);
+
+  function toggleSidebar() {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  function selectDay(event) {
+    setDays(event.target.value);
+  }
+
+  function handleCourseName(event) {
+    setCourseName(event.target.value);
+  }
+
+  function handleTimeChange(event) {
+    const { name, value } = event.target;
+
+    if (name === "startTime") {
+      setStartTime(value);
+    } else {
+      setEndTime(value);
+    }
+  }
+
+  function addToSchedule() {
+    const newClass = {
+      day: days,
+      course: courseName,
+      start: startTime,
+      end: endTime
+    };
+    // setschedule([...schedule, newClass]);
+    setschedule(prevSchedule => [...prevSchedule, newClass]);
+  }
+
+  let count = 0;
+  schedule.forEach(() => {
+    return(count++);
+  })
+
+  const displaySchedule = schedule.map((item, index) => {
+    return (
+      <div className="schedule" key={index}>
+        <p className="table-header ">{item.day}</p>
+        <div className="course-section">
+          <div className="course-display">
+            <p className="course-name">{item.course}</p>
+            <p className="course-time">{item.start} - {item.end}</p>
+            <button className="delete-btn course-divider">Delete</button>
+          </div>
+        </div>
+        
+      </div>
+    );
+  });
+
   return (
     <>
       <title>Timetable Setup</title>
 
-      <SideBar />
+      <SideBar 
+        isSidebarOpen={isSidebarOpen}
+        sidebarClose={toggleSidebar} 
+      />
 
       <div className="sidebar-overlay" id="sidebarOverlay"></div>
 
-      <button className="sidebar-toggle" id="sidebarToggle">
+      <button 
+        className="sidebar-toggle" 
+        id="sidebarToggle"
+        onClick={toggleSidebar}
+      >
         <span className="toggle-line"></span>
         <span className="toggle-line"></span>
         <span className="toggle-line"></span>
@@ -55,8 +125,13 @@ export function TablePage() {
           <div className="input-grid">
             <div className="input-group">
               <label>Day of Week</label>
-              <select className="modern-select js-select-day">
-                <option value="" disabled selected>Select day</option>
+              <select 
+                className="modern-select"
+                value={days}
+                onChange={selectDay}
+              >
+
+                <option value="" disabled>Select day</option>
                 <option value="Monday">Monday</option>
                 <option value="Tuesday">Tuesday</option>
                 <option value="Wednesday">Wednesday</option>
@@ -67,13 +142,23 @@ export function TablePage() {
 
             <div className="input-group full-width">
               <label>Course Name</label>
-              <input className="modern-input js-course-input" type="text" placeholder="e.g., Introduction to Computer Science" />
+              <input 
+                className="modern-input" 
+                type="text" 
+                placeholder="e.g., Introduction to Computer Science"
+                value={courseName}
+                onChange={handleCourseName} />
             </div>
 
             <div className="input-group">
               <label>Start Time</label>
-              <select className="modern-select js-select-start-time">
-                <option value="" disabled selected>Start</option>
+              <select 
+                className="modern-select"
+                name="startTime"
+                value={startTime}
+                onChange={handleTimeChange}
+              >
+                <option value="" disabled>Start</option>
                 <option value="8:00">8:00 AM</option>
                 <option value="9:00">9:00 AM</option>
                 <option value="10:00">10:00 AM</option>
@@ -89,8 +174,13 @@ export function TablePage() {
 
             <div className="input-group">
               <label>End Time</label>
-              <select className="modern-select js-select-end-time">
-                <option value="" disabled selected>End</option>
+              <select 
+                className="modern-select"
+                name="endTime"
+                value={endTime}
+                onChange={handleTimeChange}
+              >
+                <option value="" disabled>End</option>
                 <option value="9:00">9:00 AM</option>
                 <option value="10:00">10:00 AM</option>
                 <option value="11:00">11:00 AM</option>
@@ -105,7 +195,9 @@ export function TablePage() {
             </div>
           </div>
 
-          <button className="add-button js-add-to-day">
+          <button 
+            className="add-button"
+            onClick={addToSchedule}>
             <span>+</span>
             Add to Schedule
           </button>
@@ -115,11 +207,13 @@ export function TablePage() {
         <section className="schedule-section">
           <div className="section-header">
             <h2>Weekly Schedule</h2>
-            <span className="course-count js-course-count">0 courses</span>
+            <span className="course-count">{count} courses</span>
           </div>
 
-          <div className="schedule-grid js-display-table">
+          <div 
+            className="schedule-grid">
             {/* Days will be generated here */}
+            {displaySchedule}
           </div>
         </section>
 

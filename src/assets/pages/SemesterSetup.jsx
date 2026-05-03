@@ -52,7 +52,6 @@ export function SemesterSetup() {
       [id]: value
     }));
 
-    console.log(event.target.value);
     setErrorMessage("");
   };
 

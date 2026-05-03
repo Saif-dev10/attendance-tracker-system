@@ -225,6 +225,10 @@
   background: #fecaca;
 }
 
+.delete-btn:active {
+  background-color: #f1b7b7;
+}
+
 
 /* Empty state */
 .empty-text {
