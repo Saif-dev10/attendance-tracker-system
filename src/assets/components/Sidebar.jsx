@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './Sidebar.css';
 export function SideBar({ isSidebarOpen, sidebarClose }) {
 
@@ -16,26 +17,27 @@ export function SideBar({ isSidebarOpen, sidebarClose }) {
       </div>
 
       <nav className="sidebar-nav">
-        <a href="index.html" className="nav-link active" data-page="index">
+        <Link to="/" className="nav-link active" data-page="index">
           <span className="nav-icon">⚙️</span>
           <span className="nav-text">Setup</span>
-        </a>
-        <a href="table.html" className="nav-link" data-page="table">
+        </Link> 
+
+        <Link to="/table" className="nav-link" data-page="table">
           <span className="nav-icon">📅</span>
           <span className="nav-text">Timetable</span>
-        </a>
-        <a href="attendance.html" className="nav-link" data-page="attendance">
+        </Link> 
+        <Link to="/attendance" className="nav-link" data-page="attendance">
           <span className="nav-icon">✏️</span>
           <span className="nav-text">Attendance</span>
-        </a>
-        <a href="dashboard.html" className="nav-link" data-page="dashboard">
+        </Link> 
+        <Link to="/dashboard" className="nav-link" data-page="dashboard">
           <span className="nav-icon">📊</span>
           <span className="nav-text">Dashboard</span>
-        </a>
-        <a href="summary.html" className="nav-link" data-page="summary">
+        </Link> 
+        <Link to="/summary" className="nav-link" data-page="summary">
           <span className="nav-icon">📋</span>
           <span className="nav-text">Summary</span>
-        </a>
+        </Link> 
       </nav>
 
       <div className="sidebar-footer">

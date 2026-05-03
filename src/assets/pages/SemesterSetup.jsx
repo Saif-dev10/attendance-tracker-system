@@ -96,6 +96,10 @@ export function SemesterSetup() {
           </div>
 
           <div className="form-group">
+            
+            {/* Error message */}
+            <p className="error-message">An input fiels is not filled</p>
+
             <label htmlFor="startDate">Semester Start Date</label>
             <div className="input-wrapper">
               <span className="input-icon">📅</span>

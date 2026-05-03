@@ -15,7 +15,7 @@ function App () {
       <Route path="/course" element={<CourseDetails />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/summary" element={<Summary />} />
-      <Route path="table" element={<TablePage />} />
+      <Route path="/table" element={<TablePage />} />
 
       <Route path="*" element={<PageNotFound />} />
     </Routes>
