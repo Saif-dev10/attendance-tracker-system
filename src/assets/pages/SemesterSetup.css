@@ -1,0 +1,243 @@
+/* Main container */
+.setup-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+
+/* Progress bar at top */
+.progress-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+  padding: 0 20px;
+}
+
+.progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e5e7eb;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+.progress-step.active .step-number {
+  background: #3b82f6;
+  color: white;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.step-label {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.progress-step.active .step-label {
+  color: #3b82f6;
+}
+
+.progress-line {
+  flex: 1;
+  height: 2px;
+  background: #e5e7eb;
+  margin: 0 16px;
+  max-width: 60px;
+}
+
+
+/* Form card */
+.form-card {
+  background: white;
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.05);
+  margin-bottom: 24px;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.form-header h2 {
+  margin: 0 0 8px 0;
+  color: #111827;
+  font-size: 24px;
+}
+
+.form-header p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+
+/* Form inputs */
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 16px;
+  font-size: 18px;
+  opacity: 0.6;
+}
+
+.date-input {
+  width: 100%;
+  padding: 14px 16px 14px 48px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 16px;
+  color: #111827;
+  background: #f9fafb;
+  transition: all 0.2s;
+  box-sizing: border-box;
+}
+
+.date-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+
+/* Save button */
+.save-button {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.save-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+}
+
+.save-button:active {
+  transform: translateY(0);
+  opacity: 0.8;
+}
+
+.button-icon {
+  font-size: 18px;
+}
+
+
+/* Info tip */
+.info-tip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: #eff6ff;
+  border-radius: 12px;
+  border-left: 4px solid #3b82f6;
+}
+
+.tip-icon {
+  font-size: 20px;
+}
+
+.info-tip p {
+  margin: 0;
+  color: #1e40af;
+  font-size: 14px;
+}
+
+
+/* Toast message */
+.save-message {
+  position: fixed;
+  top: 50px;
+  right: 380px;
+  z-index: 1000;
+}
+
+.popup-message {
+  background: #10b981;
+  color: white;
+  padding: 16px 24px;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+
+/* Mobile responsive */
+@media (max-width: 640px) {
+  .progress-bar {
+    padding: 0 10px;
+  }
+  
+  .step-label {
+    font-size: 10px;
+  }
+  
+  .form-card {
+    padding: 24px;
+  }
+
+  .save-message {
+    right: 280px;
+  }
+}

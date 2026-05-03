@@ -1,0 +1,252 @@
+/* Container */
+.attendance-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 30px 20px 100px;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+
+/* Date display */
+.js-current-date {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+
+/* Progress overview pills */
+.progress-overview {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 28px;
+  justify-content: center;
+}
+
+.stat-pill {
+  background: white;
+  padding: 12px 20px;
+  border-radius: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  min-width: 100px;
+}
+
+.stat-pill.completed {
+  background: #dbeafe;
+}
+
+.pill-label {
+  font-size: 12px;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+.pill-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.stat-pill.completed .pill-value {
+  color: #2563eb;
+}
+
+
+/* Attendance list */
+.attendance-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+
+/* Course card */
+.attendance-row {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+}
+
+.attendance-row:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Marked states */
+.attendance-row.marked-present {
+  border-color: #10b981;
+  background: #f0fdf4;
+}
+
+.attendance-row.marked-absent {
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+
+/* Course name */
+.attendance-row p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+}
+
+
+/* Button group */
+.button-div {
+  display: flex;
+  gap: 10px;
+}
+
+/* Present button */
+.js-present {
+  padding: 10px 20px;
+  background: white;
+  color: #10b981;
+  border: 2px solid #10b981;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.js-present:hover {
+  background: #10b981;
+  color: white;
+  transform: scale(1.05);
+}
+
+.attendance-row.marked-present .js-present {
+  background: #10b981;
+  color: white;
+}
+
+/* Absent button */
+.js-absent {
+  padding: 10px 20px;
+  background: white;
+  color: #ef4444;
+  border: 2px solid #ef4444;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.js-absent:hover {
+  background: #ef4444;
+  color: white;
+  transform: scale(1.05);
+}
+
+.attendance-row.marked-absent .js-absent {
+  background: #ef4444;
+  color: white;
+}
+
+
+/* Completion message */
+.completion-message {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.completion-content {
+  background: #f0fdf4;
+  border-radius: 16px;
+  padding: 32px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.completion-icon {
+  font-size: 48px;
+}
+
+.completion-content p {
+  margin: 0;
+  color: #166534;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+
+/* Empty state */
+.attendance-row p:only-child {
+  text-align: center;
+  color: #6b7280;
+  padding: 20px;
+}
+
+
+/* Floating action button */
+.fab-container {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+}
+
+.fab-button {
+  padding: 16px 32px;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+  transition: all 0.2s;
+}
+
+.fab-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(59, 130, 246, 0.5);
+}
+
+.fab-button:active {
+  opacity: 0.8;
+}
+
+.fab-button span {
+  font-size: 20px;
+}
+
+
+/* Mobile */
+@media (max-width: 640px) {
+  .attendance-row {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+  
+  .button-div {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .js-present,
+  .js-absent {
+    flex: 1;
+  }
+}

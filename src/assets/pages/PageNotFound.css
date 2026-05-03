@@ -1,0 +1,17 @@
+.not-found-page {
+  padding: 20px;
+  padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-size: 25px;
+  color: rgb(41, 39, 39);
+}
+
+p {
+  color: gray;
+}
