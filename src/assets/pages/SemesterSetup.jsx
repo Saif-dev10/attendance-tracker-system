@@ -1,20 +1,32 @@
 import { useState } from "react";
 import { Header } from "../components/Header";
 import { SideBar } from "../components/Sidebar";
+import { useNavigate } from "react-router-dom";
 import { SaveButton } from "../components/SaveButton";
 import { SaveMessage } from "../components/SaveMessage";
 import './SemesterSetup.css';
 import '../components/General.css';
 
 export function SemesterSetup() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  function toggleSidebar() {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   const [showMessage, setShowMessage] = useState(false);
 
-  function handleSave() {
+  const navigate = useNavigate();
+
+  function handleSave(event) {
+    event.preventDefault();
+
     setShowMessage(true);
 
     setTimeout(() => {
       setShowMessage(false);
-    }, 3000);
+      navigate("/table")
+    }, 2000);
   };
 
   const [dates, setDates] = useState({
@@ -29,16 +41,23 @@ export function SemesterSetup() {
       [id]: value
     }));
     console.log(event.target.value);
-  }
+  };
 
   return (
     <>
       <Header />
-      <SideBar />
+      <SideBar 
+        isSidebarOpen={isSidebarOpen}
+        sidebarClose={toggleSidebar}
+      />
 
       <div className="sidebar-overlay" id="sidebarOverlay"></div>
 
-      <button className="sidebar-toggle" id="sidebarToggle">
+      <button 
+        className="sidebar-toggle" 
+        id="sidebarToggle"
+        onClick={toggleSidebar}
+      >
         <span className="toggle-line"></span>
         <span className="toggle-line"></span>
         <span className="toggle-line"></span>
@@ -50,6 +69,7 @@ export function SemesterSetup() {
       <div className="header-spacer"></div>
 
       <main className="setup-container">
+        
         {/* Progress indicator */}
         <div className="progress-bar">
           <div className="progress-step active">

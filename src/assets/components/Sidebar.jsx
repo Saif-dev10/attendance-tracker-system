@@ -1,11 +1,16 @@
 import './Sidebar.css';
-export function SideBar() {
+export function SideBar({ isSidebarOpen, sidebarClose }) {
+
   return (
-    <aside className="sidebar" id="sidebar">
+    <aside className={`sidebar ${isSidebarOpen ? "open" : ""}`} id="sidebar">
       <div className="sidebar-brand">
         <div className="brand-icon">🎓</div>
         <span className="brand-text">AttendTrack</span>
-        <button className="sidebar-close" id="sidebarClose">
+        <button 
+          className="sidebar-close" 
+          id="sidebarClose"
+          onClick={sidebarClose}
+          >
           ✕
         </button>
       </div>
