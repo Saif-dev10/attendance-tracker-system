@@ -15,11 +15,21 @@ export function SemesterSetup() {
   };
 
   const [showMessage, setShowMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
   function handleSave(event) {
     event.preventDefault();
+
+    const {startDate, endDate, examDate} = dates;
+
+    if (!startDate || !endDate || !examDate) {
+      setErrorMessage("Please fill in all date fields.");
+      return;
+    }
+
+    setErrorMessage("");
 
     setShowMessage(true);
 
@@ -36,11 +46,14 @@ export function SemesterSetup() {
   });
   function handleDateChange(event) {
     const { id, value } = event.target;
+
     setDates(prevDates => ({
       ...prevDates,
       [id]: value
     }));
+
     console.log(event.target.value);
+    setErrorMessage("");
   };
 
   return (
@@ -96,9 +109,11 @@ export function SemesterSetup() {
           </div>
 
           <div className="form-group">
-            
+
             {/* Error message */}
-            <p className="error-message">An input fiels is not filled</p>
+            {
+              errorMessage && (<p className="error-message">{errorMessage}</p>)
+            }
 
             <label htmlFor="startDate">Semester Start Date</label>
             <div className="input-wrapper">
