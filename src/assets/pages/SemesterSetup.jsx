@@ -44,6 +44,7 @@ export function SemesterSetup() {
     endDate: "",
     examDate: "",
   });
+  
   function handleDateChange(event) {
     const { id, value } = event.target;
 

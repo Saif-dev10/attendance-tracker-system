@@ -91,6 +91,14 @@
   color: #9ca3af;
 }
 
+/* Error Message */
+.errorMessage {
+  color: red;
+  font-size: 18px;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
 
 /* Add button */
 .add-button {

@@ -9,8 +9,9 @@ export function TablePage() {
   const [courseName, setCourseName] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
-  const [schedule, setschedule] = useState([]);
-  // const [displaySchedule, setDisplaySchedule] = useState([]);
+  const [schedule, setSchedule] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
+  // const [deleteButton, setDeleteButton] = useState(false);
 
   function toggleSidebar() {
     setIsSidebarOpen(!isSidebarOpen);
@@ -34,37 +35,84 @@ export function TablePage() {
     }
   }
 
+  function toMinutes(time) {
+    const [hour, minute] = time.split(":").map(Number);
+    return hour * 60 + minute;
+  };
+
   function addToSchedule() {
+    if (!days || !courseName || !startTime || !endTime) {
+      setErrorMessage("Please fill in all fields!");
+      return;
+    };
+
+    const start = toMinutes(startTime);
+    const end = toMinutes(endTime);
+
+    if (start >= end) {
+      setErrorMessage("End time must be after start time.");
+      return;
+    }
+
+    // if (toMinutes(startTime) >= toMinutes(endTime)) {
+    //   setErrorMessage("End time must be after start time.");
+    //   return;
+    // }
+
+    setErrorMessage("");
+
+    function generateId() {
+      return Date.now();
+    }
+
     const newClass = {
+      id: generateId(),
       day: days,
       course: courseName,
       start: startTime,
       end: endTime
     };
     // setschedule([...schedule, newClass]);
-    setschedule(prevSchedule => [...prevSchedule, newClass]);
+    setSchedule(prevSchedule => [...prevSchedule, newClass]);
+
+    setDays("");
+    setCourseName("");
+    setStartTime("");
+    setEndTime("");
   }
 
-  let count = 0;
-  schedule.forEach(() => {
-    return(count++);
-  })
+  const count = schedule.length;
 
-  const displaySchedule = schedule.map((item, index) => {
+  function deleteClass(indexToDelete) {
+    const updated = schedule.filter(items => items.id !== indexToDelete);
+    setSchedule(updated);
+  }
+
+  const displaySchedule = schedule.map((item) => {
     return (
-      <div className="schedule" key={index}>
+      <div className="schedule" key={item.id}>
         <p className="table-header ">{item.day}</p>
         <div className="course-section">
           <div className="course-display">
             <p className="course-name">{item.course}</p>
-            <p className="course-time">{item.start} - {item.end}</p>
-            <button className="delete-btn course-divider">Delete</button>
+            <p className="course-time">
+              {item.start} - {item.end}</p>
+            <button 
+              className="delete-btn course-divider"
+              onClick={() => deleteClass(item.id)}
+            >
+              Delete
+            </button>
           </div>
         </div>
         
       </div>
     );
   });
+
+  // function handleDeleteButton(index) {
+    
+  // }
 
   return (
     <>
@@ -164,11 +212,11 @@ export function TablePage() {
                 <option value="10:00">10:00 AM</option>
                 <option value="11:00">11:00 AM</option>
                 <option value="12:00">12:00 PM</option>
-                <option value="1:00">1:00 PM</option>
-                <option value="2:00">2:00 PM</option>
-                <option value="3:00">3:00 PM</option>
-                <option value="4:00">4:00 PM</option>
-                <option value="5:00">5:00 PM</option>
+                <option value="13:00">1:00 PM</option>
+                <option value="14:00">2:00 PM</option>
+                <option value="15:00">3:00 PM</option>
+                <option value="16:00">4:00 PM</option>
+                <option value="17:00">5:00 PM</option>
               </select>
             </div>
 
@@ -185,15 +233,19 @@ export function TablePage() {
                 <option value="10:00">10:00 AM</option>
                 <option value="11:00">11:00 AM</option>
                 <option value="12:00">12:00 PM</option>
-                <option value="1:00">1:00 PM</option>
-                <option value="2:00">2:00 PM</option>
-                <option value="3:00">3:00 PM</option>
-                <option value="4:00">4:00 PM</option>
-                <option value="5:00">5:00 PM</option>
-                <option value="6:00">6:00 PM</option>
+                <option value="13:00">1:00 PM</option>
+                <option value="14:00">2:00 PM</option>
+                <option value="15:00">3:00 PM</option>
+                <option value="16:00">4:00 PM</option>
+                <option value="17:00">5:00 PM</option>
+                <option value="18:00">6:00 PM</option>
               </select>
             </div>
           </div>
+
+          {errorMessage && (<p 
+            className="errorMessage"
+          >{errorMessage}</p>)}
 
           <button 
             className="add-button"
