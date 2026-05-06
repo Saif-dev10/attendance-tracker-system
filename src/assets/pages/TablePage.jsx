@@ -116,6 +116,8 @@ export function TablePage() {
   const navigate = useNavigate();
 
   function saveInfo() {
+    addToSchedule();
+
     setShowMessage(true);
     
     setTimeout(() => {
@@ -287,6 +289,7 @@ export function TablePage() {
             className="save-schedule-btn"
             value={showMessage}
             onClick={saveInfo}
+            disabled={!days || !courseName || !startTime || !endTime}
           >
             <span>💾</span>
             Save Timetable
