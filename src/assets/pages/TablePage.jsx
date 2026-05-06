@@ -2,6 +2,9 @@ import { useState } from "react";
 import { Header } from "../components/Header";
 import { SideBar } from "../components/Sidebar";
 import './Table.css';
+import { SaveMessage } from "../components/SaveMessage";
+import { useNavigate } from "react-router-dom";
+// import { SaveButton } from "../components/SaveButton";
 
 export function TablePage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -11,7 +14,7 @@ export function TablePage() {
   const [endTime, setEndTime] = useState("");
   const [schedule, setSchedule] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
-  // const [deleteButton, setDeleteButton] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
 
   function toggleSidebar() {
     setIsSidebarOpen(!isSidebarOpen);
@@ -62,7 +65,7 @@ export function TablePage() {
     setErrorMessage("");
 
     function generateId() {
-      return Date.now();
+      return crypto.randomUUID;
     }
 
     const newClass = {
@@ -110,9 +113,16 @@ export function TablePage() {
     );
   });
 
-  // function handleDeleteButton(index) {
+  const navigate = useNavigate();
+
+  function saveInfo() {
+    setShowMessage(true);
     
-  // }
+    setTimeout(() => {
+      setShowMessage(false);
+      navigate("/attendance");
+    }, 2000);
+  };
 
   return (
     <>
@@ -122,6 +132,8 @@ export function TablePage() {
         isSidebarOpen={isSidebarOpen}
         sidebarClose={toggleSidebar} 
       />
+
+      <SaveMessage showMessage={showMessage} />
 
       <div className="sidebar-overlay" id="sidebarOverlay"></div>
 
@@ -271,7 +283,11 @@ export function TablePage() {
 
         {/* Save button */}
         <div className="action-bar">
-          <button className="save-schedule-btn js-save-button">
+          <button 
+            className="save-schedule-btn"
+            value={showMessage}
+            onClick={saveInfo}
+          >
             <span>💾</span>
             Save Timetable
           </button>
