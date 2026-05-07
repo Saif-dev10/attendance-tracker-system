@@ -24,6 +24,24 @@ export function Attendance() {
 
       <main className="attendance-container">
         {/* Progress overview */}
+
+        <div className="progress-bar">
+          <div className="progress-step">
+            <span className="step-number">1</span>
+            <span className="step-label">Dates</span>
+          </div>
+          <div className="progress-line"></div>
+          <div className="progress-step">
+            <span className="step-number">2</span>
+            <span className="step-label">Timetable</span>
+          </div>
+          <div className="progress-line"></div>
+          <div className="progress-step active">
+            <span className="step-number">3</span>
+            <span className="step-label">Attendance</span>
+          </div>
+        </div>
+
         <div className="progress-overview">
           <div className="stat-pill">
             <span className="pill-label">Today's classNamees</span>
