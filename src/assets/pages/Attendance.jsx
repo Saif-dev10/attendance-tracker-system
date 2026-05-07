@@ -1,18 +1,32 @@
+import { useState } from "react";
 import "./Attendance.css";
 import { Header } from "../components/Header";
 import { SideBar } from "../components/SideBar";
 import '../components/General.css';
 
 export function Attendance() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  function toggleSidebar() {
+    setIsSidebarOpen(!isSidebarOpen)
+  }
+
   return (
     <>
       <title>Mark Attendance</title>
       <Header />
-      <SideBar />
+      <SideBar 
+        isSidebarOpen={isSidebarOpen}
+        sidebarClose={toggleSidebar}
+      />
 
       <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-      <button class="sidebar-toggle" id="sidebarToggle">
+      <button 
+        class="sidebar-toggle" 
+        id="sidebarToggle"
+        onClick={toggleSidebar}
+      >
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
