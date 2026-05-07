@@ -4,7 +4,6 @@ import { SideBar } from "../components/Sidebar";
 import './Table.css';
 import { SaveMessage } from "../components/SaveMessage";
 import { useNavigate } from "react-router-dom";
-// import { SaveButton } from "../components/SaveButton";
 
 export function TablePage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -57,15 +56,10 @@ export function TablePage() {
       return;
     }
 
-    // if (toMinutes(startTime) >= toMinutes(endTime)) {
-    //   setErrorMessage("End time must be after start time.");
-    //   return;
-    // }
-
     setErrorMessage("");
 
     function generateId() {
-      return crypto.randomUUID;
+      return crypto.randomUUID();  // Added () to actually call the function
     }
 
     const newClass = {
@@ -75,7 +69,7 @@ export function TablePage() {
       start: startTime,
       end: endTime
     };
-    // setschedule([...schedule, newClass]);
+
     setSchedule(prevSchedule => [...prevSchedule, newClass]);
 
     setDays("");
@@ -86,8 +80,8 @@ export function TablePage() {
 
   const count = schedule.length;
 
-  function deleteClass(indexToDelete) {
-    const updated = schedule.filter(items => items.id !== indexToDelete);
+  function deleteClass(idToDelete) {
+    const updated = schedule.filter(item => item.id !== idToDelete);  // Cleaned up variable name
     setSchedule(updated);
   }
 
@@ -108,16 +102,22 @@ export function TablePage() {
             </button>
           </div>
         </div>
-        
       </div>
     );
   });
 
   const navigate = useNavigate();
 
+  // saveInfo no longer calls addToSchedule()
   function saveInfo() {
-    addToSchedule();
+    // Check if there are any courses in the schedule
+    if (schedule.length === 0) {
+      setErrorMessage("Please add at least one course to the schedule before saving.");
+      setShowMessage(false);
+      return;
+    }
 
+    setErrorMessage("");
     setShowMessage(true);
     
     setTimeout(() => {
@@ -192,7 +192,6 @@ export function TablePage() {
                 value={days}
                 onChange={selectDay}
               >
-
                 <option value="" disabled>Select day</option>
                 <option value="Monday">Monday</option>
                 <option value="Tuesday">Tuesday</option>
@@ -287,9 +286,8 @@ export function TablePage() {
         <div className="action-bar">
           <button 
             className="save-schedule-btn"
-            value={showMessage}
-            onClick={saveInfo}
-            disabled={!days || !courseName || !startTime || !endTime}
+            onClick={saveInfo}  // ✅ Removed value={showMessage} - buttons don't use value
+            disabled={schedule.length === 0}  // ✅ Disable if no courses added
           >
             <span>💾</span>
             Save Timetable
