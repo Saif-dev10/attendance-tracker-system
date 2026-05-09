@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Header } from "../components/Header";
 import { SideBar } from "../components/Sidebar";
 import './Table.css';
@@ -11,7 +11,13 @@ export function TablePage() {
   const [courseName, setCourseName] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
-  const [schedule, setSchedule] = useState([]);
+  
+  const [schedule, setSchedule] = useState(() => {
+    const savedSchedule = localStorage.getItem("schedule");
+
+    return savedSchedule ? JSON.parse(savedSchedule) : [];
+  });
+
   const [errorMessage, setErrorMessage] = useState("");
   const [showMessage, setShowMessage] = useState(false);
 
@@ -42,7 +48,7 @@ export function TablePage() {
     return hour * 60 + minute;
   };
 
-  function addToSchedule() {
+function addToSchedule() {
     if (!days || !courseName || !startTime || !endTime) {
       setErrorMessage("Please fill in all fields!");
       return;
@@ -125,6 +131,10 @@ export function TablePage() {
       navigate("/attendance");
     }, 2000);
   };
+
+  useEffect(() => {
+    localStorage.setItem("schedule", JSON.stringify(schedule));
+  }, [schedule]);
 
   return (
     <>

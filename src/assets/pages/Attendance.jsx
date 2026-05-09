@@ -1,11 +1,13 @@
 import { useState } from "react";
-import "./Attendance.css";
 import { Header } from "../components/Header";
 import { SideBar } from "../components/SideBar";
+import { TablePage } from "./TablePage";
 import '../components/General.css';
+import "./Attendance.css";
 
 export function Attendance() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [courses, setCourses] = useState([]);
 
   function toggleSidebar() {
     setIsSidebarOpen(!isSidebarOpen)
@@ -58,7 +60,7 @@ export function Attendance() {
 
         <div className="progress-overview">
           <div className="stat-pill">
-            <span className="pill-label">Today's classNamees</span>
+            <span className="pill-label">Today's classNames</span>
             <span className="pill-value js-today-count">0</span>
           </div>
           <div className="stat-pill completed">
