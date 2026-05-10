@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { Header } from "../components/Header";
 import { SideBar } from "../components/SideBar";
-import { TablePage } from "./TablePage";
 import '../components/General.css';
 import "./Attendance.css";
 
 export function Attendance() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [courses, setCourses] = useState([]);
+  // const [courses, setCourses] = useState([]);
 
   function toggleSidebar() {
     setIsSidebarOpen(!isSidebarOpen)

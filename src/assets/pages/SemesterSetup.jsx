@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Header } from "../components/Header";
 import { SideBar } from "../components/Sidebar";
 import { useNavigate } from "react-router-dom";
@@ -9,35 +9,8 @@ import '../components/General.css';
 
 export function SemesterSetup() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  function toggleSidebar() {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
-
   const [showMessage, setShowMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-
-  const navigate = useNavigate();
-
-  function handleSave(event) {
-    event.preventDefault();
-
-    const {startDate, endDate, examDate} = dates;
-
-    if (!startDate || !endDate || !examDate) {
-      setErrorMessage("Please fill in all date fields.");
-      return;
-    }
-
-    setErrorMessage("");
-
-    setShowMessage(true);
-
-    setTimeout(() => {
-      setShowMessage(false);
-      navigate("/table")
-    }, 2000);
-  };
 
   const [dates, setDates] = useState({
     startDate: "",
@@ -45,45 +18,92 @@ export function SemesterSetup() {
     examDate: "",
   });
   
+  const navigate = useNavigate();
+  const timeoutRef = useRef(null);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
+
+  function toggleSidebar() {
+    setIsSidebarOpen(prev => !prev);
+  }
+
   function handleDateChange(event) {
     const { id, value } = event.target;
+    setDates(prev => ({ ...prev, [id]: value }));
+    setErrorMessage("");
+  }
 
-    setDates(prevDates => ({
-      ...prevDates,
-      [id]: value
-    }));
+  function validateDates({ startDate, endDate, examDate }) {
+
+    if (!startDate || !endDate || !examDate) {
+      return "Please fill in all date fields.";
+    }
+
+    if (new Date(endDate) <= new Date(startDate)) {
+      return "End date must be after start date.";
+    }
+
+    const exam = new Date(examDate);
+
+    if (exam < new Date(startDate) || exam > new Date(endDate)) {
+      return "Exam date must be within the semester period.";
+    }
+
+    return "";
+  }
+
+  function handleSave(event) {
+    event.preventDefault();
+    const error = validateDates(dates);
+    
+    if (error) {
+      setErrorMessage(error);
+      return;
+    }
 
     setErrorMessage("");
-  };
+
+    localStorage.setItem("semesterDates", JSON.stringify(dates));
+
+    setShowMessage(true);
+
+    timeoutRef.current = setTimeout(() => {
+      setShowMessage(false);
+      navigate("/table");
+    }, 2000);
+  }
 
   return (
     <>
       <Header />
+
       <SideBar 
         isSidebarOpen={isSidebarOpen}
-        sidebarClose={toggleSidebar}
+        sidebarClose={toggleSidebar} 
       />
-
+      
       <div className="sidebar-overlay" id="sidebarOverlay"></div>
 
       <button 
         className="sidebar-toggle" 
         id="sidebarToggle"
         onClick={toggleSidebar}
+        aria-label="Toggle sidebar"
+        aria-expanded={isSidebarOpen}
       >
         <span className="toggle-line"></span>
         <span className="toggle-line"></span>
         <span className="toggle-line"></span>
       </button>
 
-      {/* Save Message */}
       <SaveMessage showMessage={showMessage} />
-
       <div className="header-spacer"></div>
 
       <main className="setup-container">
-        
-        {/* Progress indicator */}
         <div className="progress-bar">
           <div className="progress-step active">
             <span className="step-number">1</span>
@@ -101,29 +121,25 @@ export function SemesterSetup() {
           </div>
         </div>
 
-        {/* Form card */}
-        <div className="form-card">
+        <form className="form-card" onSubmit={handleSave}>
           <div className="form-header">
             <h2>Academic Dates</h2>
             <p>Set your semester timeline</p>
           </div>
 
+          {errorMessage && <p className="error-message" role="alert">{errorMessage}</p>}
+
           <div className="form-group">
-
-            {/* Error message */}
-            {
-              errorMessage && (<p className="error-message">{errorMessage}</p>)
-            }
-
             <label htmlFor="startDate">Semester Start Date</label>
             <div className="input-wrapper">
-              <span className="input-icon">📅</span>
+              <span className="input-icon" aria-hidden="true">📅</span>
               <input
-                className="date-input js-data-input"
+                className="date-input"
                 type="date"
                 id="startDate"
                 value={dates.startDate}
                 onChange={handleDateChange}
+                required
               />
             </div>
           </div>
@@ -131,13 +147,14 @@ export function SemesterSetup() {
           <div className="form-group">
             <label htmlFor="endDate">Semester End Date</label>
             <div className="input-wrapper">
-              <span className="input-icon">📅</span>
+              <span className="input-icon" aria-hidden="true">📅</span>
               <input
-                className="date-input js-data-input"
+                className="date-input"
                 type="date"
                 id="endDate"
                 value={dates.endDate}
                 onChange={handleDateChange}
+                required
               />
             </div>
           </div>
@@ -145,23 +162,23 @@ export function SemesterSetup() {
           <div className="form-group">
             <label htmlFor="examDate">Examination Date</label>
             <div className="input-wrapper">
-              <span className="input-icon">📝</span>
+              <span className="input-icon" aria-hidden="true">📝</span>
               <input
-                className="date-input js-data-input"
+                className="date-input"
                 type="date"
                 id="examDate"
                 value={dates.examDate}
                 onChange={handleDateChange}
+                required
               />
             </div>
           </div>
 
-          {/* Save Button */}
           <SaveButton onSave={handleSave} />
-        </div>
+        </form>
 
         <div className="info-tip">
-          <span className="tip-icon">💡</span>
+          <span className="tip-icon" aria-hidden="true">💡</span>
           <p>You can edit these dates later from the settings menu.</p>
         </div>
       </main>
