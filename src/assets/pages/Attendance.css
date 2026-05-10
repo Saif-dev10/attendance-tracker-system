@@ -231,6 +231,276 @@
   font-size: 20px;
 }
 
+.error-banner {
+  background-color: #fee2e2;
+  border: 1px solid #ef4444;
+  color: #991b1b;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.error-icon {
+  font-size: 20px;
+}
+
+.error-text {
+  flex: 1;
+  font-size: 14px;
+}
+
+.error-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #991b1b;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  background: #f9fafb;
+  border-radius: 12px;
+  border: 2px dashed #d1d5db;
+}
+
+.empty-icon {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.empty-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.empty-sub {
+  color: #6b7280;
+  margin-bottom: 16px;
+}
+
+.empty-hint {
+  font-size: 13px;
+  color: #9ca3af;
+  background: #fff;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.course-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 4px solid transparent;
+}
+
+.marked-present {
+  border-left-color: #22c55e;
+}
+
+.marked-absent {
+  border-left-color: #ef4444;
+}
+
+.course-info {
+  flex: 1;
+}
+
+.course-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.course-meta {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.attendance-mini-stats {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.mini-percent {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.mini-percent.safe {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.mini-percent.warning {
+  background: #fef9c3;
+  color: #854d0e;
+}
+
+.mini-percent.danger {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.mini-count {
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.attendance-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.btn-present, .btn-absent {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.btn-present {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.btn-present:hover {
+  background: #bbf7d0;
+}
+
+.btn-absent {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.btn-absent:hover {
+  background: #fecaca;
+}
+
+.marked-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.status-badge {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.status-badge.present {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-badge.absent {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.btn-change {
+  background: none;
+  border: none;
+  color: #6b7280;
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.btn-change:hover {
+  color: #374151;
+}
+
+.completion-message {
+  display: none;
+  margin: 24px 0;
+  padding: 20px;
+  background: #dcfce7;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.completion-message.visible {
+  display: block;
+}
+
+.completion-icon {
+  font-size: 32px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.fab-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+}
+
+.fab-button {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+}
+
+.fab-button:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+}
+
+.fab-button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.loading-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 18px;
+  color: #6b7280;
+}
+
 
 /* Mobile */
 @media (max-width: 640px) {

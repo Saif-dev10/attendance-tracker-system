@@ -13,8 +13,7 @@ export function TablePage() {
   const [endTime, setEndTime] = useState("");
   
   const [schedule, setSchedule] = useState(() => {
-    const savedSchedule = localStorage.getItem("schedule");
-
+    const savedSchedule = localStorage.getItem("scheduleList");
     return savedSchedule ? JSON.parse(savedSchedule) : [];
   });
 
@@ -23,7 +22,7 @@ export function TablePage() {
 
   function toggleSidebar() {
     setIsSidebarOpen(!isSidebarOpen);
-  };
+  }
 
   function selectDay(event) {
     setDays(event.target.value);
@@ -35,7 +34,6 @@ export function TablePage() {
 
   function handleTimeChange(event) {
     const { name, value } = event.target;
-
     if (name === "startTime") {
       setStartTime(value);
     } else {
@@ -46,13 +44,13 @@ export function TablePage() {
   function toMinutes(time) {
     const [hour, minute] = time.split(":").map(Number);
     return hour * 60 + minute;
-  };
+  }
 
-function addToSchedule() {
+  function addToSchedule() {
     if (!days || !courseName || !startTime || !endTime) {
       setErrorMessage("Please fill in all fields!");
       return;
-    };
+    }
 
     const start = toMinutes(startTime);
     const end = toMinutes(endTime);
@@ -64,14 +62,11 @@ function addToSchedule() {
 
     setErrorMessage("");
 
-    function generateId() {
-      return crypto.randomUUID();  // Added () to actually call the function
-    }
-
     const newClass = {
-      id: generateId(),
+      id: crypto.randomUUID(),
       day: days,
-      course: courseName,
+      courseName: courseName,
+      time: `${startTime} - ${endTime}`,
       start: startTime,
       end: endTime
     };
@@ -87,19 +82,20 @@ function addToSchedule() {
   const count = schedule.length;
 
   function deleteClass(idToDelete) {
-    const updated = schedule.filter(item => item.id !== idToDelete);  // Cleaned up variable name
+    const updated = schedule.filter(item => item.id !== idToDelete);
     setSchedule(updated);
   }
 
   const displaySchedule = schedule.map((item) => {
     return (
       <div className="schedule" key={item.id}>
-        <p className="table-header ">{item.day}</p>
+        <p className="table-header">{item.day}</p>
         <div className="course-section">
           <div className="course-display">
-            <p className="course-name">{item.course}</p>
+            <p className="course-name">{item.courseName}</p>
             <p className="course-time">
-              {item.start} - {item.end}</p>
+              {item.start} - {item.end}
+            </p>
             <button 
               className="delete-btn course-divider"
               onClick={() => deleteClass(item.id)}
@@ -114,9 +110,7 @@ function addToSchedule() {
 
   const navigate = useNavigate();
 
-  // saveInfo no longer calls addToSchedule()
   function saveInfo() {
-    // Check if there are any courses in the schedule
     if (schedule.length === 0) {
       setErrorMessage("Please add at least one course to the schedule before saving.");
       setShowMessage(false);
@@ -130,10 +124,10 @@ function addToSchedule() {
       setShowMessage(false);
       navigate("/attendance");
     }, 2000);
-  };
+  }
 
   useEffect(() => {
-    localStorage.setItem("schedule", JSON.stringify(schedule));
+    localStorage.setItem("scheduleList", JSON.stringify(schedule));
   }, [schedule]);
 
   return (
@@ -166,20 +160,16 @@ function addToSchedule() {
       <div className="header-spacer"></div>
 
       <main className="timetable-container">
-
-        {/* Progress indicator */}
         <div className="progress-bar">
           <div className="progress-step">
             <span className="step-number">1</span>
             <span className="step-label">Dates</span>
           </div>
-          
           <div className="progress-line"></div>
           <div className="progress-step active">
             <span className="step-number">2</span>
             <span className="step-label">Timetable</span>
           </div>
-
           <div className="progress-line"></div>
           <div className="progress-step">
             <span className="step-number">3</span>
@@ -187,7 +177,6 @@ function addToSchedule() {
           </div>
         </div>
 
-        {/* Add class form card */}
         <section className="form-section">
           <div className="section-header">
             <h2>Add New Class</h2>
@@ -218,7 +207,8 @@ function addToSchedule() {
                 type="text" 
                 placeholder="e.g., Introduction to Computer Science"
                 value={courseName}
-                onChange={handleCourseName} />
+                onChange={handleCourseName} 
+              />
             </div>
 
             <div className="input-group">
@@ -266,44 +256,40 @@ function addToSchedule() {
             </div>
           </div>
 
-          {errorMessage && (<p 
-            className="errorMessage"
-          >{errorMessage}</p>)}
+          {errorMessage && (
+            <p className="errorMessage">{errorMessage}</p>
+          )}
 
           <button 
             className="add-button"
-            onClick={addToSchedule}>
+            onClick={addToSchedule}
+          >
             <span>+</span>
             Add to Schedule
           </button>
         </section>
 
-        {/* Weekly schedule display */}
         <section className="schedule-section">
           <div className="section-header">
             <h2>Weekly Schedule</h2>
             <span className="course-count">{count} courses</span>
           </div>
 
-          <div 
-            className="schedule-grid">
-            {/* Days will be generated here */}
+          <div className="schedule-grid">
             {displaySchedule}
           </div>
         </section>
 
-        {/* Save button */}
         <div className="action-bar">
           <button 
             className="save-schedule-btn"
-            onClick={saveInfo}  // ✅ Removed value={showMessage} - buttons don't use value
-            disabled={schedule.length === 0}  // ✅ Disable if no courses added
+            onClick={saveInfo}
+            disabled={schedule.length === 0}
           >
             <span>💾</span>
             Save Timetable
           </button>
         </div>
-
       </main>
     </>
   );
