@@ -1,277 +1,308 @@
-/* Main container - centers content */
+/* ============================================
+   SUMMARY PAGE - Mature & Human-Friendly
+   ============================================ */
+
 .summary-container {
-  max-width: 1200px;
+  max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 32px 24px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #334155;
+  line-height: 1.6;
 }
 
 
-/* Top status banner */
+/* Top status banner - soft and informative */
 .status-banner {
-  padding: 20px;
+  padding: 16px 20px;
   border-radius: 12px;
-  margin-bottom: 30px;
+  margin-bottom: 32px;
   text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  font-size: 18px;
-  font-weight: 500;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  font-size: 15px;
+  font-weight: 450;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #475569;
 }
 
-/* Green banner - all eligible */
 .status-banner.success {
-  background-color: #d4edda;
-  color: #155724;
-  border: 1px solid #c3e6cb;
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+  color: #166534;
 }
 
-/* Yellow banner - some at risk */
 .status-banner.warning {
-  background-color: #fff3cd;
-  color: #856404;
-  border: 1px solid #ffeaa7;
+  background: #fffbeb;
+  border-color: #fde68a;
+  color: #92400e;
 }
 
-/* Red banner - none eligible */
 .status-banner.danger {
-  background-color: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #991b1b;
 }
 
-/* Icon in banner */
 .banner-icon {
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 18px;
+  margin-right: 8px;
 }
 
 
-/* Grid layout for course cards */
+/* Course grid - clean and breathable */
 .course-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 24px;
+  gap: 16px;
   margin-bottom: 40px;
 }
 
 
-/* Individual course card */
+/* Course card - subtle, grounded */
 .course-card {
-  background: white;
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.07);
-  border: 2px solid transparent;
-  transition: transform 0.2s, box-shadow 0.2s;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
+  position: relative;
 }
 
-/* Hover effect on card */
 .course-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  transform: translateY(-1px);
 }
 
-/* Card border colors based on status */
-.course-card.excellent {
-  border-color: #22c55e;
+/* Status indicated by left accent, not loud borders */
+.course-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 16px;
+  bottom: 16px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: #94a3b8;
 }
 
-.course-card.good {
-  border-color: #eab308;
+.course-card.eligible::before {
+  background: #22c55e;
 }
 
-.course-card.danger {
-  border-color: #ef4444;
+.course-card.risk::before {
+  background: #ef4444;
+}
+
+.course-card.neutral::before {
+  background: #cbd5e1;
 }
 
 
-/* Card header with name and badge */
+/* Card layout - horizontal, calm */
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 12px;
 }
 
 .course-name {
   margin: 0;
-  font-size: 20px;
-  color: #1f2937;
+  font-size: 16px;
   font-weight: 600;
+  color: #1e293b;
+  letter-spacing: -0.2px;
 }
 
-/* Status badge (ELIGIBLE, EXCELLENT, NOT ELIGIBLE) */
 .status-badge {
-  padding: 6px 14px;
+  padding: 4px 10px;
   border-radius: 20px;
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
+  background: #f1f5f9;
+  color: #64748b;
 }
 
-/* Badge colors */
-.excellent .status-badge {
-  background-color: #dcfce7;
-  color: #166534;
+.course-card.eligible .status-badge {
+  background: #dcfce7;
+  color: #15803d;
 }
 
-.good .status-badge {
-  background-color: #fef9c3;
-  color: #854d0e;
+.course-card.risk .status-badge {
+  background: #fee2e2;
+  color: #b91c1c;
 }
 
-.danger .status-badge {
-  background-color: #fee2e2;
-  color: #991b1b;
+.course-card.neutral .status-badge {
+  background: #f1f5f9;
+  color: #64748b;
 }
 
 
-/* Big percentage circle */
-.percentage-ring {
-  text-align: center;
-  padding: 24px 0;
+/* Percentage - understated */
+.percentage-display {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 16px;
 }
 
 .percentage-number {
-  display: block;
-  font-size: 48px;
+  font-size: 32px;
   font-weight: 700;
-  color: #111827;
+  color: #1e293b;
   line-height: 1;
+  letter-spacing: -0.5px;
 }
 
 .percentage-label {
-  display: block;
-  color: #6b7280;
-  font-size: 14px;
-  margin-top: 4px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  font-size: 13px;
+  color: #94a3b8;
+  font-weight: 500;
 }
 
 
-/* Mini stats row (Present, Missed, Total) */
+/* Mini stats - quiet and useful */
 .card-stats {
   display: flex;
-  justify-content: space-around;
+  gap: 24px;
   padding-top: 16px;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid #f1f5f9;
 }
 
 .mini-stat {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .mini-number {
-  display: block;
-  font-size: 24px;
-  font-weight: 700;
-  color: #374151;
+  font-size: 18px;
+  font-weight: 600;
+  color: #334155;
 }
 
 .mini-label {
-  display: block;
   font-size: 12px;
-  color: #9ca3af;
+  color: #94a3b8;
+  font-weight: 500;
   text-transform: uppercase;
-  margin-top: 2px;
+  letter-spacing: 0.3px;
 }
 
 
-/* Bottom stats section */
+/* Final stats section - minimal */
 .final-stats {
-  background: white;
-  border-radius: 16px;
-  padding: 28px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
   margin-bottom: 24px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+  border: 1px solid #e2e8f0;
 }
 
 .final-stats h2 {
   margin: 0 0 20px 0;
-  color: #1f2937;
-  font-size: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
 }
 
-/* Three stat boxes in a row */
 .stats-row {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
 }
 
 .stat-box {
-  flex: 1;
-  min-width: 120px;
   text-align: center;
-  padding: 20px;
-  background: #f9fafb;
-  border-radius: 12px;
+  padding: 20px 16px;
+  background: #f8fafc;
+  border-radius: 10px;
+  transition: background 0.2s;
+}
+
+.stat-box:hover {
+  background: #f1f5f9;
 }
 
 .stat-number {
   display: block;
-  font-size: 36px;
+  font-size: 28px;
   font-weight: 700;
-  color: #111827;
+  color: #1e293b;
+  margin-bottom: 4px;
+  letter-spacing: -0.5px;
 }
 
 .stat-label {
   display: block;
-  color: #6b7280;
-  font-size: 14px;
-  margin-top: 4px;
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* Subtle color hints for stats */
+.stat-box:nth-child(2) .stat-number {
+  color: #15803d;
+}
+
+.stat-box:nth-child(3) .stat-number {
+  color: #b91c1c;
 }
 
 
-/* Action message at bottom */
+/* Action message - gentle guidance */
 .action-message {
   text-align: center;
   padding: 20px;
-  border-radius: 12px;
-  background: #f3f4f6;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+  font-size: 14px;
 }
 
-.success-text {
-  color: #166534;
-  font-weight: 500;
-  margin: 0;
-}
-
-.warning-text {
-  color: #92400e;
-  font-weight: 500;
+.action-message p {
   margin: 0;
 }
 
 
-/* Empty state when no courses */
+/* Empty state - warm, not cold */
 .empty-state {
   text-align: center;
   padding: 60px 20px;
-  color: #6b7280;
-  grid-column: 1 / -1;
+  color: #94a3b8;
+}
+
+.empty-state-icon {
+  font-size: 40px;
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+
+.empty-state p {
+  font-size: 15px;
+  margin: 0;
 }
 
 
-/* Mobile responsive */
+/* Mobile */
 @media (max-width: 640px) {
-  .course-grid {
+  .summary-container {
+    padding: 20px 16px;
+  }
+
+  .stats-row {
     grid-template-columns: 1fr;
   }
-  
-  .stats-row {
-    flex-direction: column;
+
+  .course-grid {
+    gap: 12px;
   }
-  
+
   .percentage-number {
-    font-size: 36px;
+    font-size: 28px;
   }
 }
