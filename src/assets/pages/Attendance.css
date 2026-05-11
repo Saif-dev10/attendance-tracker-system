@@ -404,6 +404,10 @@
   background: #fecaca;
 }
 
+.btn-present:active, .btn-absent:active {
+  opacity: 0.6;
+}
+
 .marked-status {
   display: flex;
   flex-direction: column;
