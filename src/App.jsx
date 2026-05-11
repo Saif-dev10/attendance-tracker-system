@@ -6,6 +6,7 @@ import { PageNotFound } from "./assets/pages/PageNotFound";
 import { Dashboard } from "./assets/pages/DashBoard";
 import { Summary } from "./assets/pages/Summary";
 import { TablePage } from "./assets/pages/TablePage";
+import { Notifications } from "./assets/pages/Notifications";
 
 function App () {
   return (
@@ -16,6 +17,7 @@ function App () {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/summary" element={<Summary />} />
       <Route path="/table" element={<TablePage />} />
+      <Route path="/notifications" element={<Notifications />} />
 
       <Route path="*" element={<PageNotFound />} />
     </Routes>
