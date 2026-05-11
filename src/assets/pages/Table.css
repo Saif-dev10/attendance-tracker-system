@@ -1,7 +1,7 @@
 /* Container */
 .timetable-container {
   max-width: 1000px;
-  margin: 0 auto;
+  margin-left: 300px;
   padding: 30px 20px;
   font-family: 'Segoe UI', system-ui, sans-serif;
 }
@@ -312,6 +312,12 @@
 
 
 /* Mobile */
+@media (max-width: 900px) {
+.timetable-container {
+  margin: 0 auto;
+}
+};
+
 @media (max-width: 640px) {
   .input-grid {
     grid-template-columns: 1fr;
@@ -327,5 +333,9 @@
 
   .save-message {
   right: 250px;
+}
+
+.timetable-container {
+  margin: 0 auto;
 }
 }

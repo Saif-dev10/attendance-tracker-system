@@ -1,7 +1,7 @@
 /* Container */
 .attendance-container {
   max-width: 700px;
-  margin: 0 auto;
+  margin-left: 420px;
   padding: 30px 20px 100px;
   font-family: 'Segoe UI', system-ui, sans-serif;
 }
@@ -507,6 +507,12 @@
 
 
 /* Mobile */
+@media (max-width: 900px) {
+.attendance-container {
+  margin: 0 auto;
+}
+};
+
 @media (max-width: 640px) {
   .attendance-row {
     flex-direction: column;
