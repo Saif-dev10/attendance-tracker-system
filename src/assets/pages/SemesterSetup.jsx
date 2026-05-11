@@ -33,7 +33,11 @@ export function SemesterSetup() {
 
   function handleDateChange(event) {
     const { id, value } = event.target;
-    setDates(prev => ({ ...prev, [id]: value }));
+    setDates(prev => ({
+       ...prev,
+        [id]: value 
+    }));
+
     setErrorMessage("");
   }
 
@@ -79,7 +83,10 @@ export function SemesterSetup() {
 
   return (
     <>
-      <Header />
+      <Header
+        title="Semester Setup"
+        subtitle="Step 1: set your academic dates"
+      />
 
       <SideBar 
         isSidebarOpen={isSidebarOpen}

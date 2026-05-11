@@ -185,7 +185,12 @@ export function Attendance() {
   return (
     <>
       <title>Mark Attendance</title>
-      <Header />
+
+      <Header 
+        title="Mark Attendance" 
+        subtitle="Step 3: Track your daily attendance"
+      />
+
       <SideBar
         isSidebarOpen={isSidebarOpen}
         sidebarClose={toggleSidebar}

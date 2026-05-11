@@ -155,7 +155,10 @@ export function TablePage() {
 
       <div className="save-message js-save-message"></div>
 
-      <Header />
+      <Header 
+        title="Timetable Setup" 
+        subtitle="Step 2: Add your weekly courses"
+      />
 
       <div className="header-spacer"></div>
 

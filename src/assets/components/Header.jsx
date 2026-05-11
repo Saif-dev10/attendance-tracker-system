@@ -1,9 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import './Header.css';
-export function Header() {
+
+export function Header({ title, subtitle }) {
+  const navigate = useNavigate();
+
   return (
     <header className="main-header" id="mainHeader">
       <div className="header-container">
-        {/* Left: Menu toggle (if sidebar exists) or logo */}
         <div className="header-left">
           <div className="header-brand-mobile">
             <span className="header-logo">🎓</span>
@@ -11,15 +14,11 @@ export function Header() {
           </div>
         </div>
 
-        {/* Center: Page Title */}
         <div className="header-center">
-          <h1 className="header-title js-header-title">Page Title</h1>
-          <p className="header-subtitle js-header-subtitle">
-            Subtitle goes here
-          </p>
+          <h1 className="header-title">{title || "Page Title"}</h1>
+          <p className="header-subtitle">{subtitle || ""}</p>
         </div>
 
-        {/* Right: Actions/Profile */}
         <div className="header-right">
           <button className="header-icon-btn" title="Notifications">
             <span>🔔</span>
@@ -28,9 +27,13 @@ export function Header() {
               style={{ display: "none" }}
             ></span>
           </button>
-          <div className="header-profile">
+          <button 
+            className="header-profile"
+            onClick={() => navigate("/dashboard")}
+            title="Go to Dashboard"
+          >
             <span className="profile-avatar">👤</span>
-          </div>
+          </button>
         </div>
       </div>
 
