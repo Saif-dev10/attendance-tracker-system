@@ -154,10 +154,17 @@
 
 /* Profile avatar */
 .header-profile {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  background: none;
+  transition: all 0.2s;
+  box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
   border: none;
-  padding: 0;
 }
 
 .header-profile:hover {
