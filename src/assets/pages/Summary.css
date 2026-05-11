@@ -4,7 +4,7 @@
 
 .summary-container {
   max-width: 800px;
-  margin: 0 auto;
+  margin-left: 350px;
   padding: 32px 24px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color: #334155;
@@ -289,9 +289,16 @@
 
 
 /* Mobile */
+@media (max-width: 900px) {
+.summary-container {
+  margin: 0 auto;
+}
+};
+
 @media (max-width: 640px) {
   .summary-container {
     padding: 20px 16px;
+    margin: 0 auto;
   }
 
   .stats-row {
