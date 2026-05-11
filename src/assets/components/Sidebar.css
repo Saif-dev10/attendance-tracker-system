@@ -3,8 +3,9 @@
   position: fixed;
   top: 0;
   left: 0;
+  bottom: 0;
   width: 260px;
-  height: 100vh;
+  /* height: 100vh; */
   background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
   color: white;
   display: flex;
