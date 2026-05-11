@@ -18,12 +18,12 @@ export function Header({ title, subtitle }) {
     <>
       <header className="main-header" id="mainHeader">
         <div className="header-container">
-          <div className="header-left">
+          {/* <div className="header-left">
             <div className="header-brand-mobile">
               <span className="header-logo">🎓</span>
               <span className="header-brand-text">AttendTrack</span>
             </div>
-          </div>
+          </div> */}
 
           <div className="header-center">
             <h1 className="header-title">{title || "Page Title"}</h1>
