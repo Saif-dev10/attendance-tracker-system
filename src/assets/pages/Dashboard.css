@@ -1,7 +1,8 @@
 /* Container */
 .dashboard-container {
   max-width: 900px;
-  margin: 0 auto;
+  margin-left: 350px;
+  /* margin: 0 auto; */
   padding: 30px 20px;
   font-family: 'Segoe UI', system-ui, sans-serif;
 }
@@ -393,8 +394,14 @@
   color: #991b1b;
 }
 
-
 /* Mobile */
+
+@media (max-width: 900px) {
+  .dashboard-container {
+    margin: 0 auto;
+  }
+};
+
 @media (max-width: 640px) {
   .stats-row {
     grid-template-columns: 1fr;
@@ -406,5 +413,9 @@
   
   .stat-card {
     justify-content: center;
+  }
+
+  .dashboard-container {
+    margin: 0 auto;
   }
 }
