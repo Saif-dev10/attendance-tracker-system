@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Sidebar.css';
-export function SideBar({ isSidebarOpen, sidebarClose }) {
 
+export function SideBar({ isSidebarOpen, sidebarClose }) {
   return (
     <aside className={`sidebar ${isSidebarOpen ? "open" : ""}`} id="sidebar">
       <div className="sidebar-brand">
@@ -11,33 +11,58 @@ export function SideBar({ isSidebarOpen, sidebarClose }) {
           className="sidebar-close" 
           id="sidebarClose"
           onClick={sidebarClose}
-          >
+        >
           ✕
         </button>
       </div>
 
       <nav className="sidebar-nav">
-        <Link to="/" className="nav-link active" data-page="index">
+        {/* Add 'end' prop so "/" only matches exact root, not all pages */}
+        <NavLink 
+          to="/" 
+          end
+          className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+          onClick={sidebarClose}
+        >
           <span className="nav-icon">⚙️</span>
           <span className="nav-text">Setup</span>
-        </Link> 
+        </NavLink> 
 
-        <Link to="/table" className="nav-link" data-page="table">
+        <NavLink 
+          to="/table"
+          className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+          onClick={sidebarClose}
+        >
           <span className="nav-icon">📅</span>
           <span className="nav-text">Timetable</span>
-        </Link> 
-        <Link to="/attendance" className="nav-link" data-page="attendance">
+        </NavLink> 
+
+        <NavLink 
+          to="/attendance"
+          className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+          onClick={sidebarClose}
+        >
           <span className="nav-icon">✏️</span>
           <span className="nav-text">Attendance</span>
-        </Link> 
-        <Link to="/dashboard" className="nav-link" data-page="dashboard">
+        </NavLink> 
+        
+        <NavLink 
+          to="/dashboard"
+          className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+          onClick={sidebarClose}
+        >
           <span className="nav-icon">📊</span>
           <span className="nav-text">Dashboard</span>
-        </Link> 
-        <Link to="/summary" className="nav-link" data-page="summary">
+        </NavLink> 
+
+        <NavLink 
+          to="/summary"
+          className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+          onClick={sidebarClose}
+        >
           <span className="nav-icon">📋</span>
           <span className="nav-text">Summary</span>
-        </Link> 
+        </NavLink> 
       </nav>
 
       <div className="sidebar-footer">
