@@ -244,6 +244,10 @@
 }
 
 /* Subtle color hints for stats */
+.stat-box:nth-child(1) .stat-number {
+  color: #2563eb;
+}
+
 .stat-box:nth-child(2) .stat-number {
   color: #15803d;
 }
