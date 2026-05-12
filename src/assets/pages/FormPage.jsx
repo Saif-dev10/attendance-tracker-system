@@ -26,6 +26,8 @@ export function FormPage() {
 
   function toggleSignInSignUp() {
 
+    setErrorMessage("");
+
     setIsSignIn(prev => {
 
       const newState = !prev;
@@ -106,112 +108,176 @@ export function FormPage() {
       return;
     }
 
+    const storedUsers =
+      JSON.parse(localStorage.getItem("users")) || [];
+
+    if (!isSignIn) {
+
+      // SIGN UP
+
+      const existingUser = storedUsers.find(
+        (user) => user.email === email
+      );
+
+      if (existingUser) {
+        setErrorMessage("Account already exists.");
+        return;
+      }
+
+      const newUser = {
+        name,
+        email,
+        password
+      };
+
+      storedUsers.push(newUser);
+
+      localStorage.setItem(
+        "users",
+        JSON.stringify(storedUsers)
+      );
+
+      localStorage.setItem(
+        "currentUser",
+        JSON.stringify(newUser)
+      );
+
+      setShowMessage(true);
+
+      setTimeout(() => {
+        navigate("/semesterSetup");
+      }, 1500);
+
+    } else {
+
+      // SIGN IN
+
+      const existingUser = storedUsers.find(
+        (user) =>
+          user.email === email &&
+          user.password === password
+      );
+
+      if (!existingUser) {
+        setErrorMessage("Invalid email or password.");
+        return;
+      }
+
+      localStorage.setItem(
+        "currentUser",
+        JSON.stringify(existingUser)
+      );
+
+      setShowMessage(true);
+
+      setTimeout(() => {
+        navigate("/semesterSetup");
+      }, 1500);
+    }
+
     setErrorMessage("");
-
-    setShowMessage(true);
-
-    setTimeout(() => {
-      navigate("/semesterSetup");
-    }, 1500);
   }
 
   return (
 
     <section className="form-container">
+
       <div className="form-page">
 
-      <h1 className="form-title">
-        Login or Sign Up
-      </h1>
+        <h1 className="form-title">
+          {isSignIn ? "Login" : "Create Account"}
+        </h1>
 
-      {showMessage && (
-        <p
-          id="popUp"
-          className="popup"
-        >
-          ✅ Login Successful!
-        </p>
-      )}
-
-      <section className="form-section">
-
-        <form
-          className="form-card"
-          onSubmit={handleSubmit}
-        >
-
-          <p className="error-message">
-            {errorMessage}
+        {showMessage && (
+          <p
+            id="popUp"
+            className="popup"
+          >
+            ✅ {isSignIn
+              ? "Login Successful!"
+              : "Account Created Successfully!"}
           </p>
+        )}
 
-          <input
-            className="form-input"
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={handleChange(setEmail)}
-          />
+        <section className="form-section">
 
-          {!isSignIn && (
-            <input
-              className="form-input"
-              type="text"
-              placeholder="Enter your name"
-              value={name}
-              onChange={handleChange(setName)}
-            />
-          )}
+          <form
+            className="form-card"
+            onSubmit={handleSubmit}
+          >
 
-          <div className="password-wrapper">
+            <p className="error-message">
+              {errorMessage}
+            </p>
 
             <input
-              type={passwordVisible ? "text" : "password"}
               className="form-input"
-              placeholder="Enter your password"
-              value={password}
-              onChange={handleChange(setPassword)}
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={handleChange(setEmail)}
             />
+
+            {!isSignIn && (
+              <input
+                className="form-input"
+                type="text"
+                placeholder="Enter your name"
+                value={name}
+                onChange={handleChange(setName)}
+              />
+            )}
+
+            <div className="password-wrapper">
+
+              <input
+                type={passwordVisible ? "text" : "password"}
+                className="form-input"
+                placeholder="Enter your password"
+                value={password}
+                onChange={handleChange(setPassword)}
+              />
+
+              <button
+                type="button"
+                className="toggle-password-btn"
+                onClick={togglePasswordVisibility}
+              >
+                {passwordVisible
+                  ? "🤫 Hide Password"
+                  : "👀 Show Password"}
+              </button>
+
+            </div>
+
+            <p className="switch-mode">
+
+              Click here to
+
+              <span
+                className="switch-link"
+                onClick={toggleSignInSignUp}
+              >
+                {isSignIn
+                  ? " Sign up"
+                  : " Sign in"}
+              </span>
+
+            </p>
 
             <button
-              type="button"
-              className="toggle-password-btn"
-              onClick={togglePasswordVisibility}
+              type="submit"
+              className="submit-btn"
             >
-              {passwordVisible
-                ? "🤫 Hide Password"
-                : "👀 Show Password"}
+              {isSignIn ? "Login" : "Create Account"}
             </button>
 
-          </div>
+          </form>
 
-          <p className="switch-mode">
-
-            Click here to
-
-            <span
-              className="switch-link"
-              onClick={toggleSignInSignUp}
-            >
-              {isSignIn
-                ? " Sign up"
-                : " Sign in"}
-            </span>
-
-          </p>
-
-          <button
-            type="submit"
-            className="submit-btn"
-          >
-            Submit
-          </button>
-
-        </form>
-
-      </section>
+        </section>
 
       </div>
+
     </section>
-    
   );
 }
