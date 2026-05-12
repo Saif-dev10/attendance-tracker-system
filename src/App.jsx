@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { LandingPage } from "./assets/pages/LandingPage";
 import { SemesterSetup } from "./assets/pages/SemesterSetup";
 import { Attendance } from "./assets/pages/Attendance";
 import { CourseDetails } from "./assets/pages/CourseDetails";
@@ -11,7 +12,8 @@ import { Notifications } from "./assets/pages/Notifications";
 function App () {
   return (
     <Routes>
-      <Route path="/" element={<SemesterSetup />} />
+      <Route path={"/"} element={<LandingPage />} />
+      <Route path="/semesterSetup" element={<SemesterSetup />} />
       <Route path="/attendance" element={<Attendance />} />
       <Route path="/course" element={<CourseDetails />} />
       <Route path="/dashboard" element={<Dashboard />} />
