@@ -1,14 +1,20 @@
 import { useNavigate } from "react-router-dom";
 // import { useState, useEffect } from "react";
 import "./LandingPage.css";
+// import { useState } from "react";
 
 export function LandingPage() {
   const navigate = useNavigate();
+  // const [buttonNav, setButtonNav] = useState(false);
   // const [isVisible, setIsVisible] = useState(false);
 
   // useEffect(() => {
   //   setIsVisible(true);
   // }, []);
+
+  // function buttonNav() {
+  //   setButtonNav();
+  // };
 
   return (
     <div className="landing-page loaded">
@@ -23,7 +29,7 @@ export function LandingPage() {
             <a href="#features" className="nav-link">Features</a>
             <a href="#how-it-works" className="nav-link">How it works</a>
           </div>
-          <button className="nav-cta" onClick={() => navigate("/")}>
+          <button className="nav-cta" onClick={() => navigate("/form")}>
             Get Started
           </button>
         </div>
