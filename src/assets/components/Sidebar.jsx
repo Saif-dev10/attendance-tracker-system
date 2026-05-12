@@ -19,7 +19,7 @@ export function SideBar({ isSidebarOpen, sidebarClose }) {
       <nav className="sidebar-nav">
         {/* Add 'end' prop so "/" only matches exact root, not all pages */}
         <NavLink 
-          to="/" 
+          to="/semesterSetup" 
           end
           className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
           onClick={sidebarClose}

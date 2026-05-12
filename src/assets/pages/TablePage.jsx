@@ -3,6 +3,7 @@ import { Header } from "../components/Header";
 import { SideBar } from "../components/Sidebar";
 import './Table.css';
 import { SaveMessage } from "../components/SaveMessage";
+import table from '../../../public/table.png';
 import { useNavigate } from "react-router-dom";
 
 export function TablePage() {
@@ -132,6 +133,8 @@ export function TablePage() {
 
   return (
     <>
+      <link rel="icon" type="image/svg+xml" href={table} />
+
       <title>Timetable Setup</title>
 
       <SideBar 

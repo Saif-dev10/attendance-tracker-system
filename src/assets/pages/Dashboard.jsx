@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Header } from "../components/Header";
 import { SideBar } from "../components/Sidebar";
-
+import dashboardIcon from '../../../public/dashboard.png';
 import "./Dashboard.css";
 import "../components/General.css";
 
@@ -246,6 +246,8 @@ export function Dashboard() {
 
   return (
     <>
+      <link rel="icon" type="image/svg+xml" href={dashboardIcon} />
+
       <Header
         title="Dashboard"
         subtitle="Your attendance at a glance"

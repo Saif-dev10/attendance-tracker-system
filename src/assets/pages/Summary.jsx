@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Header } from "../components/Header";
 import { SideBar } from "../components/Sidebar";
+import summaryIcon from '../../../public/idea.png';
 import './Summary.css';
 import '../components/General.css';
 
@@ -41,6 +42,8 @@ export function Summary() {
 
   return (
     <>
+      <link rel="icon" type="image/svg+xml" href={summaryIcon} />
+
       <Header title="Review" subtitle="Your final semester review" />
       <title>Semester Summary</title>
 

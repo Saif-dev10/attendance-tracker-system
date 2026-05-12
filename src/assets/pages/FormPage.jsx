@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import form from "../../../public/user.png"
 import './FormPage.css';
 
 export function FormPage() {
@@ -181,6 +182,8 @@ export function FormPage() {
   return (
 
     <section className="form-container">
+
+      <link rel="icon" type="image/svg+xml" href={form} />
 
       <div className="form-page">
 

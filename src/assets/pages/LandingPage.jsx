@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import globe from "../../../public/globe.png"
 import "./LandingPage.css";
 
 export function LandingPage() {
@@ -6,6 +7,9 @@ export function LandingPage() {
 
   return (
     <div className="landing-page loaded">
+
+      <link rel="icon" type="image/svg+xml" href={globe} />
+
       {/* Navigation */}
       <nav className="landing-nav">
         <div className="nav-inner">

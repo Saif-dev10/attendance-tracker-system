@@ -4,6 +4,7 @@ import { SideBar } from "../components/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { SaveButton } from "../components/SaveButton";
 import { SaveMessage } from "../components/SaveMessage";
+import home from '../../../public/home-button.png';
 import './SemesterSetup.css';
 import '../components/General.css';
 
@@ -83,6 +84,8 @@ export function SemesterSetup() {
 
   return (
     <>
+    <link rel="icon" type="image/svg+xml" href={home} />
+    
       <Header
         title="Semester Setup"
         subtitle="Step 1: set your academic dates"
