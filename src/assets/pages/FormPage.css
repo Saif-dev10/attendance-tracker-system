@@ -1,6 +1,17 @@
+.form-container {
+  border: 1px solid black;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .form-page {
-  min-height: 100vh;
-  padding: 40px 20px;
+  /* min-height: 100vh; */
+  /* padding: 40px 0px; */
+  width: 500px;
 }
 
 .form-title {
@@ -12,10 +23,11 @@
 
 .popup {
   position: fixed;
-  top: 20px;
-  right: -300px;
 
-  opacity: 0;
+  top: 20px;
+  right: 20px;
+
+  opacity: 1;
 
   background: linear-gradient(to right, #22c55e, #16a34a);
   color: white;
@@ -32,7 +44,9 @@
   align-items: center;
   gap: 8px;
 
-  transition: all 0.5s ease;
+  z-index: 999;
+
+  animation: slideIn 0.5s ease;
 }
 
 .form-section {
@@ -151,4 +165,23 @@
 
 .submit-btn:active {
   opacity: 0.75;
+}
+
+@keyframes slideIn {
+
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@media(max-width: 600px) {
+  .form-page {
+    width: 380px;
+  }
 }

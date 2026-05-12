@@ -153,7 +153,7 @@ export function TablePage() {
         <span className="toggle-line"></span>
       </button>
 
-      <div className="save-message js-save-message"></div>
+      <div className="save-message"></div>
 
       <Header 
         title="Timetable Setup" 

@@ -1,18 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import './FormPage.css';
 
 export function FormPage() {
+
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isSignIn, setIsSignIn] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showMessage, setShowMessage] = useState(false);
 
   function handleChange(setter) {
     return (event) => {
       setter(event.target.value);
-      console.log(event.target.value);
     };
   }
 
@@ -21,7 +25,9 @@ export function FormPage() {
   }
 
   function toggleSignInSignUp() {
+
     setIsSignIn(prev => {
+
       const newState = !prev;
 
       if (newState) {
@@ -32,22 +38,111 @@ export function FormPage() {
     });
   }
 
+  useEffect(() => {
+
+    let timer;
+
+    if (showMessage) {
+      timer = setTimeout(() => {
+        setShowMessage(false);
+      }, 3000);
+    }
+
+    return () => clearTimeout(timer);
+
+  }, [showMessage]);
+
+  function validateForm() {
+
+    if (!email.trim()) {
+      return "Email is required.";
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+      return "Please enter a valid email.";
+    }
+
+    if (!isSignIn && !name.trim()) {
+      return "Name is required.";
+    }
+
+    if (!password) {
+      return "Password is required.";
+    }
+
+    if (password.length < 8) {
+      return "Password must be at least 8 characters.";
+    }
+
+    if (!/[A-Z]/.test(password)) {
+      return "Password must contain at least one uppercase letter.";
+    }
+
+    if (!/[a-z]/.test(password)) {
+      return "Password must contain at least one lowercase letter.";
+    }
+
+    if (!/[0-9]/.test(password)) {
+      return "Password must contain at least one number.";
+    }
+
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+      return "Password must contain at least one special character.";
+    }
+
+    return null;
+  }
+
+  function handleSubmit(e) {
+
+    e.preventDefault();
+
+    const error = validateForm();
+
+    if (error) {
+      setErrorMessage(error);
+      return;
+    }
+
+    setErrorMessage("");
+
+    setShowMessage(true);
+
+    setTimeout(() => {
+      navigate("/semesterSetup");
+    }, 1500);
+  }
+
   return (
-    <div className="form-page">
+
+    <section className="form-container">
+      <div className="form-page">
 
       <h1 className="form-title">
         Login or Sign Up
       </h1>
 
-      <p id="popUp" className="popup">
-        ✅ Login Successful!
-      </p>
+      {showMessage && (
+        <p
+          id="popUp"
+          className="popup"
+        >
+          ✅ Login Successful!
+        </p>
+      )}
 
       <section className="form-section">
 
-        <form className="form-card">
+        <form
+          className="form-card"
+          onSubmit={handleSubmit}
+        >
 
-          <p className="error-message"></p>
+          <p className="error-message">
+            {errorMessage}
+          </p>
 
           <input
             className="form-input"
@@ -75,7 +170,6 @@ export function FormPage() {
               placeholder="Enter your password"
               value={password}
               onChange={handleChange(setPassword)}
-              required
             />
 
             <button
@@ -91,14 +185,18 @@ export function FormPage() {
           </div>
 
           <p className="switch-mode">
+
             Click here to
 
             <span
               className="switch-link"
               onClick={toggleSignInSignUp}
             >
-              {isSignIn ? " Sign up" : " Sign in"}
+              {isSignIn
+                ? " Sign up"
+                : " Sign in"}
             </span>
+
           </p>
 
           <button
@@ -112,6 +210,8 @@ export function FormPage() {
 
       </section>
 
-    </div>
+      </div>
+    </section>
+    
   );
 }
