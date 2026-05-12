@@ -53,7 +53,7 @@ export function LandingPage() {
               no surprises before exams.
             </p>
             <div className="hero-buttons">
-              <button className="btn-main" onClick={() => navigate("/")}>
+              <button className="btn-main" onClick={() => navigate("/form")}>
                 Start Tracking
               </button>
               <button 
@@ -205,7 +205,7 @@ export function LandingPage() {
         <div className="cta-inner">
           <h2>Stop guessing. Start knowing.</h2>
           <p>Your attendance data stays on your device. No accounts, no cloud, no tracking.</p>
-          <button className="btn-main large" onClick={() => navigate("/")}>
+          <button className="btn-main large" onClick={() => navigate("/form")}>
             Get Started Free
           </button>
         </div>
