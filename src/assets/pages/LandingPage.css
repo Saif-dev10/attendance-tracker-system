@@ -118,6 +118,10 @@
   transform: translateY(-1px);
 }
 
+.nav-cta:active {
+  opacity: 0.8;
+}
+
 
 /* ============================================
    HERO
@@ -204,6 +208,10 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
+.btn-main:active {
+  opacity: 0.8;
+}
+
 .btn-main.large {
   padding: 16px 32px;
   font-size: 16px;
@@ -224,6 +232,10 @@
 .btn-sub:hover {
   border-color: #ccc;
   background: #fafafa;
+}
+
+.btn-sub:active {
+  color: gray;
 }
 
 
