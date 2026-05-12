@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Header } from "../components/Header";
-import { SideBar } from "../components/SideBar";
+import { SideBar } from "../components/Sidebar";
 import { SaveMessage } from "../components/SaveMessage";
 import progress from '../../../public/development.png';
 import '../components/General.css';
