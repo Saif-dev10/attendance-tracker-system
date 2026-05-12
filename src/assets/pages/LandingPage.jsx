@@ -1,17 +1,17 @@
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import "./LandingPage.css";
 
 export function LandingPage() {
   const navigate = useNavigate();
-  const [isVisible, setIsVisible] = useState(false);
+  // const [isVisible, setIsVisible] = useState(false);
 
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
+  // useEffect(() => {
+  //   setIsVisible(true);
+  // }, []);
 
   return (
-    <div className={`landing-page ${isVisible ? "loaded" : ""}`}>
+    <div className="landing-page loaded">
       {/* Navigation */}
       <nav className="landing-nav">
         <div className="nav-inner">
