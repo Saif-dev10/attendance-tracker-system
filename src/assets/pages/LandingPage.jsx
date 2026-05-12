@@ -1,20 +1,8 @@
 import { useNavigate } from "react-router-dom";
-// import { useState, useEffect } from "react";
 import "./LandingPage.css";
-// import { useState } from "react";
 
 export function LandingPage() {
   const navigate = useNavigate();
-  // const [buttonNav, setButtonNav] = useState(false);
-  // const [isVisible, setIsVisible] = useState(false);
-
-  // useEffect(() => {
-  //   setIsVisible(true);
-  // }, []);
-
-  // function buttonNav() {
-  //   setButtonNav();
-  // };
 
   return (
     <div className="landing-page loaded">
@@ -23,7 +11,7 @@ export function LandingPage() {
         <div className="nav-inner">
           <div className="nav-logo">
             <div className="logo-mark">A</div>
-            <span className="logo-text">AttendTrack</span>
+            <span className="logo-text">Attendance Tracker</span>
           </div>
           <div className="nav-menu">
             <a href="#features" className="nav-link">Features</a>
@@ -217,12 +205,12 @@ export function LandingPage() {
           <div className="footer-left">
             <div className="footer-logo">
               <div className="logo-mark">A</div>
-              <span>AttendTrack</span>
+              <span>Attendance Tracker</span>
             </div>
             <p className="footer-tag">Student attendance tracking, simplified.</p>
           </div>
           <div className="footer-right">
-            <span>© 2026 AttendTrack</span>
+            <span>© {new Date().getFullYear()} Attendance Tracker</span>
           </div>
         </div>
       </footer>
