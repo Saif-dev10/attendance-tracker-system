@@ -184,9 +184,9 @@
 }
 
 
-/* ============================================
+/* 
    DESKTOP STYLES - Sidebar always visible
-   ============================================ */
+    */
 @media (min-width: 1024px) {
   .sidebar {
     transform: translateX(0);
