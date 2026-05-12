@@ -5,7 +5,7 @@ import { SemesterSetup } from "./assets/pages/SemesterSetup";
 import { Attendance } from "./assets/pages/Attendance";
 import { CourseDetails } from "./assets/pages/CourseDetails";
 import { PageNotFound } from "./assets/pages/PageNotFound";
-import { Dashboard } from "./assets/pages/DashBoard";
+import { Dashboard } from "./assets/pages/Dashboard";
 import { Summary } from "./assets/pages/Summary";
 import { TablePage } from "./assets/pages/TablePage";
 import { Notifications } from "./assets/pages/Notifications";
