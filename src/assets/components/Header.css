@@ -42,7 +42,7 @@
    LEFT SECTION - Logo/Brand
 */
 .header-left {
-  display: flex;
+  display: none;
   align-items: center;
   flex: 1;
   min-width: 0; /* Allows flex shrinking */
@@ -392,6 +392,10 @@
     left: 12px;
     width: auto;
   }
+
+  /* .header-left {
+    display: block;
+  } */
 }
 
 /* On desktop: hide toggle, adjust header padding */
